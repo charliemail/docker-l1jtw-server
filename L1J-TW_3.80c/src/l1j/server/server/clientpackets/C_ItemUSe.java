@@ -3678,13 +3678,15 @@ public class C_ItemUSe extends ClientBasePacket {
 			locAttr = 2;
 			isLawful = false;
 		}
-		if (pc.isGm()) {
-			SpellBook(pc, item, isLawful);
+		if (pc.isGm()) { // GM可以直接學習, 無視地點和屬性
+			// SpellBook(pc, item, isLawful);
+			SpellBook(pc, item, isLawful, true);
 		}
-		else if (((itemAttr == locAttr) || (itemAttr == 0)) && (locAttr != 0)) {
+		else if (((itemAttr == locAttr) || (itemAttr == 0)) && (locAttr != 0)) { // 魔法的屬性與地點屬性相同，或魔法沒有屬性。(若想將一般玩家改成就地學習, 直接改成 true 應該就可以)
+				SpellBook(pc, item, isLawful, false);
 			if (pc.isKnight()) {
 				if ((itemId >= 45000) && (itemId <= 45007) && (level >= 50)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45000) && (itemId <= 45007)) {
 					pc.sendPackets(new S_ServerMessage(312));
@@ -3695,10 +3697,10 @@ public class C_ItemUSe extends ClientBasePacket {
 			}
 			else if (pc.isCrown() || pc.isDarkelf()) {
 				if ((itemId >= 45000) && (itemId <= 45007) && (level >= 10)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45008) && (itemId <= 45015) && (level >= 20)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if (((itemId >= 45008) && (itemId <= 45015)) || ((itemId >= 45000) && (itemId <= 45007))) {
 					pc.sendPackets(new S_ServerMessage(312)); // レベルが低くてその魔法を覚えることができません。
@@ -3709,22 +3711,22 @@ public class C_ItemUSe extends ClientBasePacket {
 			}
 			else if (pc.isElf()) {
 				if ((itemId >= 45000) && (itemId <= 45007) && (level >= 8)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45008) && (itemId <= 45015) && (level >= 16)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45016) && (itemId <= 45022) && (level >= 24)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40170) && (itemId <= 40177) && (level >= 32)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40178) && (itemId <= 40185) && (level >= 40)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40186) && (itemId <= 40193) && (level >= 48)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if (((itemId >= 45000) && (itemId <= 45022)) || ((itemId >= 40170) && (itemId <= 40193))) {
 					pc.sendPackets(new S_ServerMessage(312)); // レベルが低くてその魔法を覚えることができません。
@@ -3735,42 +3737,43 @@ public class C_ItemUSe extends ClientBasePacket {
 			}
 			else if (pc.isWizard()) {
 				if ((itemId >= 45000) && (itemId <= 45007) && (level >= 4)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45008) && (itemId <= 45015) && (level >= 8)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 45016) && (itemId <= 45022) && (level >= 12)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40170) && (itemId <= 40177) && (level >= 16)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40178) && (itemId <= 40185) && (level >= 20)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40186) && (itemId <= 40193) && (level >= 24)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40194) && (itemId <= 40201) && (level >= 28)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40202) && (itemId <= 40209) && (level >= 32)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40210) && (itemId <= 40217) && (level >= 36)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else if ((itemId >= 40218) && (itemId <= 40225) && (level >= 40)) {
-					SpellBook(pc, item, isLawful);
+					SpellBook(pc, item, isLawful, false);
 				}
 				else {
-					pc.sendPackets(new S_ServerMessage(312)); // レベルが低くてその魔法を覚えることができません。
+					pc.sendPackets(new S_ServerMessage(312)); // レベルが低くてその魔法を覚えることができません。(我的等級太低，學不會那個法術。)
 				}
 			}
 		}
 		else if ((itemAttr != locAttr) && (itemAttr != 0) && (locAttr != 0)) {
 			// 間違ったテンプルで読んだ場合雷が落ちる
+			// 如果在錯誤的寺廟裡誦讀它，就會遭到雷擊。
 			pc.sendPackets(new S_ServerMessage(79)); // \f1沒有任何事情發生。
 			S_SkillSound effect = new S_SkillSound(pc.getId(), 10);
 			pc.sendPackets(effect);
@@ -3868,7 +3871,7 @@ public class C_ItemUSe extends ClientBasePacket {
 		return false;
 	}
 
-	private void SpellBook(L1PcInstance pc, L1ItemInstance item, boolean isLawful) {
+	private void SpellBook(L1PcInstance pc, L1ItemInstance item, boolean isLawful, boolean denyIfAlreadyLearned) {
 		String s = "";
 		int i = 0;
 		int level1 = 0;
@@ -3912,6 +3915,16 @@ public class C_ItemUSe extends ClientBasePacket {
 				int i7 = l1skills.getId();
 				s = l1skills.getName();
 				i = l1skills.getSkillId();
+
+				// ✅ 新增：若設定為不可重複，且已學過 -> 直接阻擋並結束（不扣書）
+				if (denyIfAlreadyLearned) {
+					// 常見 L1J 有這個方法；若你專案名稱不同，改成你實際的方法即可
+					if (pc.isSkillMastery(i)) {
+						pc.sendPackets(new S_ServerMessage(3237)); // \f1你已經學會這個技能了。
+						return;
+					}
+				}
+
 				switch (skillLevel) {
 					case 1: // '\001'
 						level1 = i7;
