@@ -88,10 +88,26 @@ public class C_MoveChar extends ClientBasePacket {
 		}
 		pc.getMap().setPassable(pc.getLocation(), true);
 
+		// if (CLIENT_LANGUAGE == 3) { // Taiwan Only
+		// 	heading ^= 0x49;
+		// 	locx = pc.getX();
+		// 	locy = pc.getY();
+		// }
+
 		if (CLIENT_LANGUAGE == 3) { // Taiwan Only
-			heading ^= 0x49;
-			locx = pc.getX();
-			locy = pc.getY();
+			int decoded = heading ^ 0x49;
+			if (decoded >= 0 && decoded < 8) {
+				heading = decoded;
+				locx = pc.getX();
+				locy = pc.getY();
+			} else {
+				// client 不是台版加密 heading，保留原值（不要改 loc）
+				// 也可以直接 return; 視你想嚴格還是寬鬆
+			}
+		}
+
+		if (heading < 0 || heading > 7) {
+			return; // 防止 HEADING_TABLE 爆炸
 		}
 
 		locx += HEADING_TABLE_X[heading];
