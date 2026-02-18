@@ -92,16 +92,60 @@ public class ConsoleProcess extends Thread {
 
 	@Override
 	public void run() {
-		while (onStarup && stillrun) {
-			String action = UserInput.nextLine();
-			String word[] = action.split(" ");
-			if (word.length == 1) {
-				execute(word[0]);
-			}
-			if (word.length == 2) {
-				execute(word[0], word[1]);
+		if (!onStarup) {
+			return;
+		}
+
+		 while (stillrun) {
+			try {
+				// Docker / 背景模式常見：stdin 直接 EOF
+				if (!UserInput.hasNextLine()) {
+					System.out.println("→提示: 沒有可用的控制台輸入（stdin EOF），關閉互動指令執行緒。");
+					break;
+				}
+
+				String action = UserInput.nextLine();
+				if (action == null) {
+					continue;
+				}
+
+				action = action.trim();
+				if (action.isEmpty()) {
+					System.out.print("> ");
+					continue;
+				}
+
+				// 用 \\s+ 可吃多個空白
+				String[] word = action.split("\\s+", 2);
+
+				if (word.length == 1) {
+					execute(word[0]);
+				} else if (word.length == 2) {
+					execute(word[0], word[1]);
+				}
+
+				System.out.print("> ");
+			} catch (java.util.NoSuchElementException e) {
+				// nextLine() 在 EOF 也可能丟這個
+				System.out.println("→提示: 控制台輸入已結束（NoSuchElement），關閉互動指令執行緒。");
+				break;
+			} catch (Throwable t) {
+				// 不讓 thread 因為任何例外死掉，至少印出來
+				t.printStackTrace();
+				System.out.print("> ");
 			}
 		}
-		System.out.println("→提示: 互動指令聽取中..." + "\n" + ">");
+
+		// while (onStarup && stillrun) {
+		// 	String action = UserInput.nextLine();
+		// 	String word[] = action.split(" ");
+		// 	if (word.length == 1) {
+		// 		execute(word[0]);
+		// 	}
+		// 	if (word.length == 2) {
+		// 		execute(word[0], word[1]);
+		// 	}
+		// }
+		// System.out.println("→提示: 互動指令聽取中..." + "\n" + ">");
 	}
 }
