@@ -17,7 +17,7 @@ package l1j.server.server.model.map;
 import l1j.server.server.types.Point;
 
 /**
- * L1Map マップ情報を保持し、それに対する様々なインターフェースを提供する。
+ * L1Map 保持地圖資訊，並提供對該資訊的各種介面。
  */
 public abstract class L1Map {
 	private static L1NullMap _nullMap = new L1NullMap();
@@ -26,9 +26,9 @@ public abstract class L1Map {
 	}
 
 	/**
-	 * このマップのマップIDを返す。
+	 * 回傳此地圖的地圖ID。
 	 * 
-	 * @return マップID
+	 * @return 地圖ID
 	 */
 	public abstract int getId();
 
@@ -42,317 +42,317 @@ public abstract class L1Map {
 	public abstract int getHeight();
 
 	/**
-	 * 指定された座標の値を返す。
+	 * 回傳指定座標的值。
 	 * 
-	 * 推奨されていません。このメソッドは、既存コードとの互換性の為に提供されています。
-	 * L1Mapの利用者は通常、マップにどのような値が格納されているかを知る必要はありません。
-	 * また、格納されている値に依存するようなコードを書くべきではありません。 デバッグ等の特殊な場合に限り、このメソッドを利用できます。
+	 * 不建議使用。此方法為與既有程式碼相容而提供。
+	 * L1Map 的使用者通常不需要知道地圖中儲存了哪些值，
+	 * 也不應撰寫依賴於儲存值的程式碼。僅在除錯等特殊情況下可使用此方法。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 指定された座標の値
+	 *            座標的 Y 值
+	 * @return 指定座標的值
 	 */
 	public abstract int getTile(int x, int y);
 
 	/**
-	 * 指定された座標の値を返す。
+	 * 回傳指定座標的值（原始地圖）。
 	 * 
-	 * 推奨されていません。このメソッドは、既存コードとの互換性の為に提供されています。
-	 * L1Mapの利用者は通常、マップにどのような値が格納されているかを知る必要はありません。
-	 * また、格納されている値に依存するようなコードを書くべきではありません。 デバッグ等の特殊な場合に限り、このメソッドを利用できます。
+	 * 不建議使用。此方法為與既有程式碼相容而提供。
+	 * L1Map 的使用者通常不需要知道地圖中儲存了哪些值，
+	 * 也不應撰寫依賴於儲存值的程式碼。僅在除錯等特殊情況下可使用此方法。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 指定された座標の値
+	 *            座標的 Y 值
+	 * @return 指定座標的值
 	 */
 	public abstract int getOriginalTile(int x, int y);
 
 	/**
-	 * 指定された座標がマップの範囲内であるかを返す。
+	 * 判斷指定座標是否在地圖範圍內。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return 範囲内であればtrue
+	 *            保存座標的 Point 物件
+	 * @return 在範圍內則回傳 true
 	 */
 	public abstract boolean isInMap(Point pt);
 
 	/**
-	 * 指定された座標がマップの範囲内であるかを返す。
+	 * 判斷指定座標是否在地圖範圍內。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 範囲内であればtrue
+	 *            座標的 Y 值
+	 * @return 在範圍內則回傳 true
 	 */
 	public abstract boolean isInMap(int x, int y);
 
 	/**
-	 * 指定された座標が通行可能であるかを返す。
+	 * 判斷指定座標是否可通行。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return 通行可能であればtrue
+	 *            保存座標的 Point 物件
+	 * @return 可通行則回傳 true
 	 */
 	public abstract boolean isPassable(Point pt);
 
 	/**
-	 * 指定された座標が通行可能であるかを返す。
+	 * 判斷指定座標是否可通行。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 通行可能であればtrue
+	 *            座標的 Y 值
+	 * @return 可通行則回傳 true
 	 */
 	public abstract boolean isPassable(int x, int y);
 
 	/**
-	 * 指定された座標のheading方向が通行可能であるかを返す。
+	 * 判斷指定座標在 heading 方向是否可通行。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return 通行可能であればtrue
+	 *            保存座標的 Point 物件
+	 * @return 可通行則回傳 true
 	 */
 	public abstract boolean isPassable(Point pt, int heading);
 
 	/**
-	 * 指定された座標のheading方向が通行可能であるかを返す。
+	 * 判斷指定座標在 heading 方向是否可通行。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 通行可能であればtrue
+	 *            座標的 Y 值
+	 * @return 可通行則回傳 true
 	 */
 	public abstract boolean isPassable(int x, int y, int heading);
 
 	/**
-	 * 指定された座標の通行可能、不能を設定する。
+	 * 設定指定座標的可通行/不可通行。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
+	 *            保存座標的 Point 物件
 	 * @param isPassable
-	 *            通行可能であればtrue
+	 *            可通行則為 true
 	 */
 	public abstract void setPassable(Point pt, boolean isPassable);
 
 	/**
-	 * 指定された座標の通行可能、不能を設定する。
+	 * 設定指定座標的可通行/不可通行。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
+	 *            座標的 Y 值
 	 * @param isPassable
-	 *            通行可能であればtrue
+	 *            可通行則為 true
 	 */
 	public abstract void setPassable(int x, int y, boolean isPassable);
 
 	/**
-	 * 指定された座標がセーフティーゾーンであるかを返す。
+	 * 判斷指定座標是否為安全區域（Safety Zone）。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return セーフティーゾーンであればtrue
+	 *            保存座標的 Point 物件
+	 * @return 為安全區域則回傳 true
 	 */
 	public abstract boolean isSafetyZone(Point pt);
 
 	/**
-	 * 指定された座標がセーフティーゾーンであるかを返す。
+	 * 判斷指定座標是否為安全區域（Safety Zone）。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return セーフティーゾーンであればtrue
+	 *            座標的 Y 值
+	 * @return 為安全區域則回傳 true
 	 */
 	public abstract boolean isSafetyZone(int x, int y);
 
 	/**
-	 * 指定された座標がコンバットゾーンであるかを返す。
+	 * 判斷指定座標是否為戰鬥區域（Combat Zone）。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return コンバットゾーンであればtrue
+	 *            保存座標的 Point 物件
+	 * @return 為戰鬥區域則回傳 true
 	 */
 	public abstract boolean isCombatZone(Point pt);
 
 	/**
-	 * 指定された座標がコンバットゾーンであるかを返す。
+	 * 判斷指定座標是否為戰鬥區域（Combat Zone）。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return コンバットゾーンであればtrue
+	 *            座標的 Y 值
+	 * @return 為戰鬥區域則回傳 true
 	 */
 	public abstract boolean isCombatZone(int x, int y);
 
 	/**
-	 * 指定された座標がノーマルゾーンであるかを返す。
+	 * 判斷指定座標是否為一般區域（Normal Zone）。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return ノーマルゾーンであればtrue
+	 *            保存座標的 Point 物件
+	 * @return 為一般區域則回傳 true
 	 */
 	public abstract boolean isNormalZone(Point pt);
 
 	/**
-	 * 指定された座標がノーマルゾーンであるかを返す。
+	 * 判斷指定座標是否為一般區域（Normal Zone）。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return ノーマルゾーンであればtrue
+	 *            座標的 Y 值
+	 * @return 為一般區域則回傳 true
 	 */
 	public abstract boolean isNormalZone(int x, int y);
 
 	/**
-	 * 指定された座標が矢や魔法を通すかを返す。
+	 * 判斷指定座標是否允許箭矢或魔法穿透。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
-	 * @return 矢や魔法を通す場合、true
+	 *            保存座標的 Point 物件
+	 * @return 允許穿透則回傳 true
 	 */
 	public abstract boolean isArrowPassable(Point pt);
 
 	/**
-	 * 指定された座標が矢や魔法を通すかを返す。
+	 * 判斷指定座標是否允許箭矢或魔法穿透。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 矢や魔法を通す場合、true
+	 *            座標的 Y 值
+	 * @return 允許穿透則回傳 true
 	 */
 	public abstract boolean isArrowPassable(int x, int y);
 
 	/**
-	 * 指定された座標のheading方向が矢や魔法を通すかを返す。
+	 * 判斷指定座標在 heading 方向是否允許箭矢或魔法穿透。
 	 * 
 	 * @param pt
-	 *            座標を保持するPointオブジェクト
+	 *            保存座標的 Point 物件
 	 * @param heading
 	 *            方向
-	 * @return 矢や魔法を通す場合、true
+	 * @return 允許穿透則回傳 true
 	 */
 	public abstract boolean isArrowPassable(Point pt, int heading);
 
 	/**
-	 * 指定された座標のheading方向が矢や魔法を通すかを返す。
+	 * 判斷指定座標在 heading 方向是否允許箭矢或魔法穿透。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
+	 *            座標的 Y 值
 	 * @param heading
 	 *            方向
-	 * @return 矢や魔法を通す場合、true
+	 * @return 允許穿透則回傳 true
 	 */
 	public abstract boolean isArrowPassable(int x, int y, int heading);
 
 	/**
-	 * このマップが、水中マップであるかを返す。
+	 * 判斷此地圖是否為水中地圖。
 	 * 
-	 * @return 水中であれば、true
+	 * @return 若為水中則回傳 true
 	 */
 	public abstract boolean isUnderwater();
 
 	/**
-	 * このマップが、ブックマーク可能であるかを返す。
+	 * 判斷此地圖是否可加入書籤。
 	 * 
-	 * @return ブックマーク可能であれば、true
+	 * @return 可加入書籤則回傳 true
 	 */
 	public abstract boolean isMarkable();
 
 	/**
-	 * このマップが、ランダムテレポート可能であるかを返す。
+	 * 判斷此地圖是否可進行隨機傳送。
 	 * 
-	 * @return ランダムテレポート可能であれば、true
+	 * @return 可進行隨機傳送則回傳 true
 	 */
 	public abstract boolean isTeleportable();
 
 	/**
-	 * このマップが、MAPを超えたテレポート可能であるかを返す。
+	 * 判斷此地圖是否允許超出地圖範圍的傳送（可逃離地圖）。
 	 * 
-	 * @return テレポート可能であれば、true
+	 * @return 允許則回傳 true
 	 */
 	public abstract boolean isEscapable();
 
 	/**
-	 * このマップが、復活可能であるかを返す。
+	 * 判斷此地圖是否允許復活。
 	 * 
-	 * @return 復活可能であれば、true
+	 * @return 允許復活則回傳 true
 	 */
 	public abstract boolean isUseResurrection();
 
 	/**
-	 * このマップが、パインワンド使用可能であるかを返す。
+	 * 判斷此地圖是否允許使用 Painwand。
 	 * 
-	 * @return パインワンド使用可能であれば、true
+	 * @return 允許使用則回傳 true
 	 */
 	public abstract boolean isUsePainwand();
 
 	/**
-	 * このマップが、デスペナルティがあるかを返す。
+	 * 判斷此地圖是否有死亡懲罰（Death Penalty）。
 	 * 
-	 * @return デスペナルティがあれば、true
+	 * @return 有則回傳 true
 	 */
 	public abstract boolean isEnabledDeathPenalty();
 
 	/**
-	 * このマップが、ペット・サモンを連れて行けるかを返す。
+	 * 判斷此地圖是否可攜帶寵物/召喚獸。
 	 * 
-	 * @return ペット・サモンを連れて行けるならばtrue
+	 * @return 可攜帶則回傳 true
 	 */
 	public abstract boolean isTakePets();
 
 	/**
-	 * このマップが、ペット・サモンを呼び出せるかを返す。
+	 * 判斷此地圖是否可召喚寵物/召喚獸。
 	 * 
-	 * @return ペット・サモンを呼び出せるならばtrue
+	 * @return 可召喚則回傳 true
 	 */
 	public abstract boolean isRecallPets();
 
 	/**
-	 * このマップが、アイテムを使用できるかを返す。
+	 * 判斷此地圖是否可使用道具。
 	 * 
-	 * @return アイテムを使用できるならばtrue
+	 * @return 可使用則回傳 true
 	 */
 	public abstract boolean isUsableItem();
 
 	/**
-	 * このマップが、スキルを使用できるかを返す。
+	 * 判斷此地圖是否可使用技能。
 	 * 
-	 * @return スキルを使用できるならばtrue
+	 * @return 可使用則回傳 true
 	 */
 	public abstract boolean isUsableSkill();
 
 	/**
-	 * 指定された座標が釣りゾーンであるかを返す。
+	 * 判斷指定座標是否為釣魚區域。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return 釣りゾーンであればtrue
+	 *            座標的 Y 值
+	 * @return 為釣魚區域則回傳 true
 	 */
     public abstract boolean isFishingZone(int x, int y);
 
 	/**
-	 * 指定された座標にドアが存在するかを返す。
+	 * 判斷指定座標是否存在門（Door）。
 	 * 
 	 * @param x
-	 *            座標のX値
+	 *            座標的 X 值
 	 * @param y
-	 *            座標のY値
-	 * @return ドアがあればtrue
+	 *            座標的 Y 值
+	 * @return 若存在門則回傳 true
 	 */
     public abstract boolean isExistDoor(int x, int y);
 
@@ -361,14 +361,14 @@ public abstract class L1Map {
 	}
 
 	/**
-	 * 指定されたptのタイルの文字列表現を返す。
+	 * 回傳指定 pt 的格子（tile）文字表示。
 	 */
 	public abstract String toString(Point pt);
 
 	/**
-	 * このマップがnullであるかを返す。
+	 * 判斷此地圖是否為 null。
 	 * 
-	 * @return nullであれば、true
+	 * @return 若為 null 則回傳 true
 	 */
 	public boolean isNull() {
 		return false;
