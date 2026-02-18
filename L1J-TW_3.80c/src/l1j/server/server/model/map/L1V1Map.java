@@ -208,31 +208,54 @@ public class L1V1Map extends L1Map {
 		// 移動予定のタイル
 		int tile2;
 
+		int newX;
+		int newY;
+
 		if (heading == 0) {
 			tile2 = accessTile(x, y - 1);
+			newX = x;
+			newY = y - 1;
 		}
 		else if (heading == 1) {
 			tile2 = accessTile(x + 1, y - 1);
+			newX = x + 1;
+			newY = y - 1;
 		}
 		else if (heading == 2) {
 			tile2 = accessTile(x + 1, y);
+			newX = x + 1;
+			newY = y;
 		}
 		else if (heading == 3) {
 			tile2 = accessTile(x + 1, y + 1);
+			newX = x + 1;
+			newY = y + 1;
 		}
 		else if (heading == 4) {
 			tile2 = accessTile(x, y + 1);
+			newX = x;
+			newY = y + 1;
 		}
 		else if (heading == 5) {
 			tile2 = accessTile(x - 1, y + 1);
+			newX = x - 1;
+			newY = y + 1;
 		}
 		else if (heading == 6) {
 			tile2 = accessTile(x - 1, y);
+			newX = x - 1;
+			newY = y;
 		}
 		else if (heading == 7) {
 			tile2 = accessTile(x - 1, y - 1);
+			newX = x - 1;
+			newY = y - 1;
 		}
 		else {
+			return false;
+		}
+
+		if (isExistDoor(newX, newY)) {
 			return false;
 		}
 
