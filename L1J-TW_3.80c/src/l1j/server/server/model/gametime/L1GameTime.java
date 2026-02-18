@@ -23,7 +23,11 @@ import l1j.server.server.utils.IntRange;
 
 public class L1GameTime {
 	// 2003年7月3日 12:00(UTC)が1月1日00:00
-	private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
+	// private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
+	// 過期時間 2030年5月15日00:32:21 (UTC)
+	// private static final long BASE_TIME_IN_MILLIS_REAL = 1547121600000L;
+	private static final long BASE_TIME_IN_MILLIS_REAL = System.currentTimeMillis();
+
 
 	private final int _time;
 
