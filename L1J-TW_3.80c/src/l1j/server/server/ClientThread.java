@@ -268,6 +268,14 @@ public class ClientThread implements Runnable, PacketOutput {
 
 				int opcode = data[0] & 0xFF;
 
+				if (opcode != Opcodes.C_OPCODE_KEEPALIVE) {
+					_log.info(String.format("RECV opcode=0x%02X len=%d activeChar=%s account=%s host=%s",
+							opcode, data.length,
+							(_activeChar != null ? _activeChar.getName() : "null"),
+							(getAccountName() != null ? getAccountName() : "null"),
+							_hostname));
+				}
+
 				// 處理多重登入
 				if (opcode == Opcodes.C_OPCODE_BEANFUNLOGINPACKET || opcode == Opcodes.C_OPCODE_CHANGECHAR) {
 					_loginStatus = 1;
@@ -406,7 +414,13 @@ public class ClientThread implements Runnable, PacketOutput {
 				if (data != null) {
 					try {
 						_handler.handlePacket(data, _activeChar);
-					} catch (Exception e) {
+					} catch (Throwable t) {
+						int opcode = data.length > 0 ? (data[0] & 0xFF) : -1;
+					_log.log(Level.SEVERE, "HcPacket handlePacket failed, opcode=0x"
+							+ Integer.toHexString(opcode) + " len=" + data.length
+							+ " char=" + (_activeChar != null ? _activeChar.getName() : "null")
+							+ " host=" + _hostname, t);
+					// 這裡不要吞掉，至少讓你看得到原因
 					}
 				} else {
 					try {
